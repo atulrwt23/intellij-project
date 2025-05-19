@@ -5,32 +5,27 @@ import java.util.Objects;
 public class Units {
 
     private final double value;
+    private final String unit;
+    private final double millimeterFactor;
 
-    private Units(double value) {
+    public Units(double value, String unit, double millimeterFactor) {
         this.value = value;
+        this.unit = unit;
+        this.millimeterFactor = millimeterFactor;
     }
 
-    public static Units inches(double value) {
-        return new Units(value * 25);
-    }
-
-    public static Units centimeter(double value) {
-        return new Units(value * 10);
-    }
-
-    public static Units millimeters(double value) {
-        return new Units(value);
-    }
-
-    public static Units feet(double value) {
-        return new Units(value * 12 * 25);
+    private Units toMillimeter() {
+        return new Units(value * millimeterFactor, "millimeter", 1);
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        Units that = (Units) o;
-        return Double.compare(value, that.value) == 0;
+    public boolean equals(Object other) {
+        if (other == null || getClass() != other.getClass()) return false;
+
+        Units otherUnit = ((Units) other).toMillimeter();
+        Units thisUnit = this.toMillimeter();
+
+        return Double.compare(thisUnit.value, otherUnit.value) == 0 && thisUnit.millimeterFactor == otherUnit.millimeterFactor && thisUnit.unit == otherUnit.unit;
     }
 
     @Override

@@ -5,33 +5,33 @@ import org.junit.jupiter.api.Test;
 class UnitsTest {
     @Test
     void oneInchShouldBeTwentyFiveMillimeter() {
-        Units oneInch = Units.inches(1);
-        Units twentyFiveMillimeter = Units.millimeters(25.0);
+        Units oneInch = new Units(1, "inches", 25);
+        Units twentyFiveMillimeter = new Units(25, "millimeter", 1);
 
-        assert(twentyFiveMillimeter.equals(oneInch));
+        assert (twentyFiveMillimeter.equals(oneInch));
     }
 
     @Test
     void oneInchShouldBeTwelveInches() {
-        Units twelveInches = Units.inches(12);
-        Units oneFeet = Units.feet(1);
+        Units twelveInches = new Units(12, "inches", 25);
+        Units oneFeet = new Units(1, "feet", 12 * 25);
 
-        assert(oneFeet.equals(twelveInches));
+        assert (oneFeet.equals(twelveInches));
     }
 
     @Test
     void twoInchesShouldBeFiveCentimeter() {
-        Units fiveCentimeter = Units.centimeter(5);
-        Units twoInches = Units.inches(2);
+        Units fiveCentimeter = new Units(5, "centimeter", 10);
+        Units twoInches = new Units(2, "inches", 25);
 
-        assert(twoInches.equals(fiveCentimeter));
+        assert (twoInches.equals(fiveCentimeter));
     }
 
     @Test
     void oneCentimeterShouldBeTenMillimeter() {
-        Units oneCentimeter = Units.centimeter(1);
-        Units tenMillimeters = Units.millimeters(10);
+        Units oneCentimeter = new Units(1, "centimeter", 10);
+        Units tenMillimeters = new Units(10, "millimeter", 1);
 
-        assert(oneCentimeter.equals(tenMillimeters));
+        assert (oneCentimeter.equals(tenMillimeters));
     }
 }

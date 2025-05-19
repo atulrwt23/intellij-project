@@ -9,9 +9,9 @@ public class Probability {
         this.value = probability;
     }
 
-    public static Probability set (double probability) throws InvalidProbabilityException {
+    public static Probability set(double probability) {
         if (probability < 0 || probability > 1) {
-            throw new InvalidProbabilityException();
+            throw new RuntimeException();
         }
 
         return new Probability(probability);
@@ -29,16 +29,16 @@ public class Probability {
         return Objects.hashCode(value);
     }
 
-    public Probability complement() throws InvalidProbabilityException {
+    public Probability complement() {
 
         return Probability.set(1 - value);
     }
 
-    public Probability and(Probability other) throws InvalidProbabilityException {
+    public Probability and(Probability other) {
         return Probability.set(value * other.value);
     }
 
-    public Probability or(Probability other) throws InvalidProbabilityException {
+    public Probability or(Probability other) {
         return other.complement().and(this.complement()).complement();
     }
 }

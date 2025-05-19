@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ProbabilityTest {
     @Test
-    void givesTheProbabilityOfTails() throws InvalidProbabilityException {
+    void givesTheProbabilityOfTails() {
         Probability probabilityOfTails = Probability.set(0.5);
 
         assertEquals(Probability.set(0.5), probabilityOfTails);
@@ -14,37 +14,37 @@ class ProbabilityTest {
 
     @Test
     void givesErrorWhenProbabilityIsMoreThanOne() {
-        assertThrows(InvalidProbabilityException.class, () -> Probability.set(7));
+        assertThrows(RuntimeException.class, () -> Probability.set(7));
     }
 
     @Test
-    void givesTheComplementOfAProbability() throws InvalidProbabilityException {
+    void givesTheComplementOfAProbability() {
         Probability p1 = Probability.set(0.3);
 
         assertEquals(Probability.set(0.7), p1.complement());
     }
 
     @Test
-    void calculatesTheProbabilityOfBothOccurring() throws InvalidProbabilityException {
+    void calculatesTheProbabilityOfBothOccurring() {
         Probability p1 = Probability.set(0.3);
         Probability p2 = Probability.set(0.3);
 
-        assertEquals(Probability.set(0.09),p1.and(p2));
+        assertEquals(Probability.set(0.09), p1.and(p2));
     }
 
     @Test
-    void calculatesTheProbabilityOfAtLeastOneEventOccurring() throws InvalidProbabilityException {
+    void calculatesTheProbabilityOfAtLeastOneEventOccurring() {
         Probability p1 = Probability.set(0.5);
         Probability p2 = Probability.set(0.6);
 
-        assertEquals(Probability.set(0.8),p1.or(p2));
+        assertEquals(Probability.set(0.8), p1.or(p2));
     }
 
     @Test
-    void calculatesTheProbabilityOfAtLeastOneEventOccurringWhenOneIsCertain() throws InvalidProbabilityException {
+    void calculatesTheProbabilityOfAtLeastOneEventOccurringWhenOneIsCertain() {
         Probability p1 = Probability.set(1);
         Probability p2 = Probability.set(0.6);
 
-        assertEquals(Probability.set(1),p1.or(p2));
+        assertEquals(Probability.set(1), p1.or(p2));
     }
 }
