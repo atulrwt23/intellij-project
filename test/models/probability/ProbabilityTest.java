@@ -6,45 +6,45 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ProbabilityTest {
     @Test
-    void givesTheProbabilityOfTails() {
-        Probability probability = Probability.favorable(0.5);
+    void givesTheProbabilityOfTails() throws InvalidProbabilityException {
+        Probability probabilityOfTails = Probability.set(0.5);
 
-        assertEquals(Probability.favorable(0.5), probability);
+        assertEquals(Probability.set(0.5), probabilityOfTails);
     }
 
     @Test
     void givesErrorWhenProbabilityIsMoreThanOne() {
-        assertThrows(RuntimeException.class, () -> Probability.favorable(7));
+        assertThrows(InvalidProbabilityException.class, () -> Probability.set(7));
     }
 
     @Test
-    void givesTheComplementOfAProbability() {
-        Probability p1 = Probability.favorable(0.3);
+    void givesTheComplementOfAProbability() throws InvalidProbabilityException {
+        Probability p1 = Probability.set(0.3);
 
-        assertEquals(Probability.favorable(0.7), p1.complement());
+        assertEquals(Probability.set(0.7), p1.complement());
     }
 
     @Test
-    void calculatesTheProbabilityOfBothOccurring() {
-        Probability p1 = Probability.favorable(0.3);
-        Probability p2 = Probability.favorable(0.3);
+    void calculatesTheProbabilityOfBothOccurring() throws InvalidProbabilityException {
+        Probability p1 = Probability.set(0.3);
+        Probability p2 = Probability.set(0.3);
 
-        assertEquals(Probability.favorable(0.09),p1.and(p2));
+        assertEquals(Probability.set(0.09),p1.and(p2));
     }
 
     @Test
-    void calculatesTheProbabilityOfAtLeastOneEventOccurring() {
-        Probability p1 = Probability.favorable(0.5);
-        Probability p2 = Probability.favorable(0.6);
+    void calculatesTheProbabilityOfAtLeastOneEventOccurring() throws InvalidProbabilityException {
+        Probability p1 = Probability.set(0.5);
+        Probability p2 = Probability.set(0.6);
 
-        assertEquals(Probability.favorable(0.8),p1.or(p2));
+        assertEquals(Probability.set(0.8),p1.or(p2));
     }
 
     @Test
-    void calculatesTheProbabilityOfAtLeastOneEventOccurringWhenOneIsCertain() {
-        Probability p1 = Probability.favorable(1);
-        Probability p2 = Probability.favorable(0.6);
+    void calculatesTheProbabilityOfAtLeastOneEventOccurringWhenOneIsCertain() throws InvalidProbabilityException {
+        Probability p1 = Probability.set(1);
+        Probability p2 = Probability.set(0.6);
 
-        assertEquals(Probability.favorable(1),p1.or(p2));
+        assertEquals(Probability.set(1),p1.or(p2));
     }
 }
