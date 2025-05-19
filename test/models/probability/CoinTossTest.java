@@ -9,6 +9,13 @@ class CoinTossTest {
     void givesTheProbabilityOfTails() {
         CoinToss coinToss = new CoinToss();
 
-        assertEquals(1/2,coinToss.tails());
+        assertEquals(0.5, coinToss.tails());
+    }
+
+    @Test
+    void givesTheProbabilityOfNotGettingTails() {
+        CoinToss coinToss = new CoinToss();
+
+        assertEquals(0.5, coinToss.notTails());
     }
 }
