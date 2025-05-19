@@ -1,13 +1,12 @@
 package models.probability;
 
-import javax.management.RuntimeMBeanException;
 import java.util.Objects;
 
 public class Probability {
-    private final double probability;
+    private final double value;
 
     public Probability(double probability) {
-        this.probability = probability;
+        this.value = probability;
     }
 
     public static Probability favorable(double probability) {
@@ -22,20 +21,24 @@ public class Probability {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Probability that = (Probability) o;
-        return Double.compare(probability, that.probability) == 0;
+        return Double.compare(value, that.value) == 0;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(probability);
+        return Objects.hashCode(value);
     }
 
     public Probability complement() {
 
-        return Probability.favorable(1 - probability);
+        return Probability.favorable(1 - value);
     }
 
-    public Probability combines(Probability obj) {
-        return Probability.favorable(probability * obj.probability);
+    public Probability and(Probability other) {
+        return Probability.favorable(value * other.value);
+    }
+
+    public Probability or(Probability other) {
+        return other.complement().and(this.complement()).complement();
     }
 }
