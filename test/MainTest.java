@@ -4,9 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MainTest {
     @Test
-    void firstTest() {
-        int expected = 1;
-
-        assertEquals(expected, 1);
+    void calculatesAreaOfRectangle() {
+        assertEquals(1, 2);
     }
 }
