@@ -1,9 +1,10 @@
 package models.measurements;
 
-public class Feet {
+public class Feet extends Units{
     private final Double value;
 
     public Feet(Double value) {
+        super(value);
         this.value = value;
     }
 

@@ -2,22 +2,19 @@ package models.measurements;
 
 import java.util.Objects;
 
-public class Inch {
+public class Inch extends Units{
     private final Double value;
 
     public Inch(Double value) {
+        super(value);
         this.value = value;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        Inch inch = (Inch) o;
-        return Objects.equals(value, inch.value);
+    public Feet toFeet() {
+        return new Feet(value / 12);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(value);
+    public Centimeter toCentimeter() {
+        return new Centimeter(value * 2.5);
     }
 }
