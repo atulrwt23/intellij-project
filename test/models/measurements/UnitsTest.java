@@ -51,4 +51,38 @@ class UnitsTest {
 
         assertEquals(fourInches,twoInches.add(twoInches));
     }
+
+    @Test
+    void calculatesTheSumOfTwoInchesToTwoPointFiveCentimeterInInches() {
+        Units twoInches = Units.inches(2);
+        Units threeInches = Units.inches(3);
+        Units twoPointFiveCentimeter = Units.centimeter(2.5);
+
+        assertEquals(threeInches,twoInches.add(twoPointFiveCentimeter));
+    }
+
+    @Test
+    void calculatesTheSumOfCentimetersInInches() {
+        Units twoAndHalfCentimeters = Units.centimeter(2.5);
+        Units twoInches = Units.inches(2);
+
+        assertEquals(twoInches, twoAndHalfCentimeters.add(twoAndHalfCentimeters));
+    }
+
+    @Test
+    void calculatesTheSumOfMillimetersInInches() {
+        Units fiftyMillimeters = Units.millimeters(50);
+        Units fourInches = Units.inches(4);
+
+        assertEquals(fourInches, fiftyMillimeters.add(fiftyMillimeters));
+    }
+
+    @Test
+    void calculatesTheSumOfCentimetersAndFeetInInches() {
+        Units oneFeet = Units.feet(1);
+        Units twoAndHalfCentimeters = Units.centimeter(2.5);
+        Units thirteenInches = Units.inches(13);
+
+        assertEquals(thirteenInches, oneFeet.add(twoAndHalfCentimeters));
+    }
 }

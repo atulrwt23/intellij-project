@@ -8,7 +8,7 @@ public class Units {
     private final MeasurementUnits unit;
 
     private Units(double value, MeasurementUnits unit) {
-        this.value = value * unit.getBaseFactor();
+        this.value = value;
         this.unit = unit;
     }
 
@@ -42,7 +42,11 @@ public class Units {
         if (unit.getMeasurementType() != ((Units) o).unit.getMeasurementType()) return false;
 
         Units that = (Units) o;
-        return Double.compare(value, that.value) == 0;
+        return Double.compare(getBaseValue(), that.getBaseValue()) == 0;
+    }
+
+    private double getBaseValue() {
+        return value * unit.getBaseFactor();
     }
 
     @Override
@@ -51,6 +55,9 @@ public class Units {
     }
 
     public Units add(Units additive) {
-        return Units.inches((additive.value + value) / additive.unit.getBaseFactor());
+        double baseFactor = MeasurementUnits.Inches.getBaseFactor();
+        double sum = additive.value * additive.unit.getBaseFactor() + value * unit.getBaseFactor();
+
+        return Units.inches(sum / baseFactor);
     }
 }
