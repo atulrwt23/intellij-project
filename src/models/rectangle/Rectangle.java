@@ -1,4 +1,4 @@
-package models;
+package models.rectangle;
 
 public class Rectangle {
     private final int length;

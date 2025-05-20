@@ -1,4 +1,4 @@
-package models;
+package models.rectangle;
 
 public class Square extends Rectangle {
 

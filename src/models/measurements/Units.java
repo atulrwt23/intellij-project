@@ -25,7 +25,7 @@ public class Units {
         Units otherUnit = ((Units) other).toMillimeter();
         Units thisUnit = this.toMillimeter();
 
-        return Double.compare(thisUnit.value, otherUnit.value) == 0 && thisUnit.millimeterFactor == otherUnit.millimeterFactor && thisUnit.unit == otherUnit.unit;
+        return Double.compare(thisUnit.value, otherUnit.value) == 0 && thisUnit.millimeterFactor == otherUnit.millimeterFactor && thisUnit.unit.equals(otherUnit.unit);
     }
 
     @Override

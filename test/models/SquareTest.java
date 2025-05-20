@@ -1,5 +1,6 @@
 package models;
 
+import models.rectangle.Square;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
