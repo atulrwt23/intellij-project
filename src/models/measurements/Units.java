@@ -5,37 +5,40 @@ import java.util.Objects;
 public class Units {
 
     private final double value;
-    private final MeasurementUnits measurementUnit;
 
-    public Units(double value, MeasurementUnits measurementUnits) {
+    private Units(double value) {
         this.value = value;
-        this.measurementUnit = measurementUnits;
     }
 
-    private Units toBase() {
-        switch (measurementUnit.getMeasurementType()) {
-            case Length: {
-                return new Units(value * measurementUnit.getBaseFactor(), MeasurementUnits.Millimeter);
-            }
+    public static Units inches(double value) {
+        return new Units(value * 25);
+    }
 
-            case Volume: {
-                return new Units(value * measurementUnit.getBaseFactor(), MeasurementUnits.Liters);
-            }
+    public static Units centimeter(double value) {
+        return new Units(value * 10);
+    }
 
-            default:
-                throw new IllegalStateException("Unexpected value: " + measurementUnit.getMeasurementType());
-        }
+    public static Units millimeters(double value) {
+        return new Units(value);
+    }
+
+    public static Units feet(double value) {
+        return new Units(value * 12 * 25);
+    }
+
+    public static Units gallon(double value) {
+        return new Units(value * 3.78);
+    }
+
+    public static Units liters(double value) {
+        return new Units(value);
     }
 
     @Override
-    public boolean equals(Object other) {
-        if (other == null || getClass() != other.getClass()) return false;
-        if (measurementUnit.getClass() != ((Units) other).measurementUnit.getClass()) return false;
-
-        Units otherUnit = ((Units) other).toBase();
-        Units thisUnit = this.toBase();
-
-        return Double.compare(thisUnit.value, otherUnit.value) == 0;
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Units that = (Units) o;
+        return Double.compare(value, that.value) == 0;
     }
 
     @Override
