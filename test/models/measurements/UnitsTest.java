@@ -2,6 +2,8 @@ package models.measurements;
 
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 class UnitsTest {
     @Test
     void oneInchShouldBeTwentyFiveMillimeter() {
@@ -40,5 +42,13 @@ class UnitsTest {
         Units liters = Units.liters(3.78);
 
         assert(gallon.equals(liters));
+    }
+
+    @Test
+    void calculatesTheSumOfTwoInchesToTwoInches() {
+        Units twoInches = Units.inches(2);
+        Units fourInches = Units.inches(4);
+
+        assertEquals(fourInches,twoInches.add(twoInches));
     }
 }
