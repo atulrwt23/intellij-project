@@ -5,27 +5,37 @@ import java.util.Objects;
 public class Units {
 
     private final double value;
-    private final String unit;
-    private final double millimeterFactor;
+    private final MeasurementUnits measurementUnit;
 
-    public Units(double value, String unit, double millimeterFactor) {
+    public Units(double value, MeasurementUnits measurementUnits) {
         this.value = value;
-        this.unit = unit;
-        this.millimeterFactor = millimeterFactor;
+        this.measurementUnit = measurementUnits;
     }
 
-    private Units toMillimeter() {
-        return new Units(value * millimeterFactor, "millimeter", 1);
+    private Units toBase() {
+        switch (measurementUnit.getMeasurementType()) {
+            case Length: {
+                return new Units(value * measurementUnit.getBaseFactor(), MeasurementUnits.Millimeter);
+            }
+
+            case Volume: {
+                return new Units(value * measurementUnit.getBaseFactor(), MeasurementUnits.Liters);
+            }
+
+            default:
+                throw new IllegalStateException("Unexpected value: " + measurementUnit.getMeasurementType());
+        }
     }
 
     @Override
     public boolean equals(Object other) {
         if (other == null || getClass() != other.getClass()) return false;
+        if (measurementUnit.getClass() != ((Units) other).measurementUnit.getClass()) return false;
 
-        Units otherUnit = ((Units) other).toMillimeter();
-        Units thisUnit = this.toMillimeter();
+        Units otherUnit = ((Units) other).toBase();
+        Units thisUnit = this.toBase();
 
-        return Double.compare(thisUnit.value, otherUnit.value) == 0 && thisUnit.millimeterFactor == otherUnit.millimeterFactor && thisUnit.unit.equals(otherUnit.unit);
+        return Double.compare(thisUnit.value, otherUnit.value) == 0;
     }
 
     @Override
